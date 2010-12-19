@@ -10,7 +10,7 @@ all_targets="teensy1 teensypp1 teensy2 teensypp2 \
               at90usbkey minimus1 minimus32 maximus \
               blackcat xplain olimex usbtinymkii \
               bentio"
-supported_firmwares="3.41 3.41_KIOSK 3.40 3.30 3.21 3.15 3.10 3.01 2.76 2.70 2.60 2.53"
+supported_firmwares="3.41 3.41_KIOSK 3.40 3.30 3.21 3.15 3.10 3.01 2.76 2.70 2.60 2.53 2.43"
 
 avr_gcc_ver=`avr-gcc --version | head -n 1 | awk '{print $3}'`
 if [[ $avr_gcc_ver < "4.3.5" ]]; then

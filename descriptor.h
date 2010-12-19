@@ -46,6 +46,8 @@
 #define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x30, 0x4f, 0x60
 #elif defined (FIRMWARE_2_53)
 #define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x30, 0x42, 0xa0
+#elif defined (FIRMWARE_2_43)
+#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x31, 0xff, 0x40
 #else
 #error You must specify the target firmware. Define a supported FIRMWARE_X_YZ in Makefile
 #endif /* FIRMWARE_X_YZ */
@@ -57,6 +59,7 @@
 
 #define PAYLOAD_FW_DEPENDENT
 #define PAYLOAD payload_dev
+
 
 #if defined (FIRMWARE_3_41)
 #define FIRMWARE 3_41
@@ -94,6 +97,9 @@
 #elif defined (FIRMWARE_2_53)
 #define FIRMWARE 2_53
 #define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3a, 0x2b, 0xa8
+#elif defined (FIRMWARE_2_43)
+#define FIRMWARE 2_43
+#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3b, 0xeb, 0xa8
 #endif /* FIRMWARE_X_YZ */
 
 
